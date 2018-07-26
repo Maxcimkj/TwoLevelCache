@@ -1,6 +1,6 @@
 # TwoLevelCache
 <p>Two level cache java realization</p>
-<h1>Used this caching strategies:</h1>
+<p><strong>Used this caching strategies:<strong></p>
 <ul>
   <li>
     Least recently used (LRU)
