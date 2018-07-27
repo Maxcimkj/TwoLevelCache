@@ -1,27 +1,27 @@
-package com.maxcim.mekh.cache;
+package com.maksim.mekh.cache;
 
-import com.maxcim.mekh.cache.cache.InMemoryCache;
+import com.maksim.mekh.cache.cache.InFileCache;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class InMemoryCacheTest {
+public class InFileCacheTest {
     private static int maxSize = 10;
-    private InMemoryCache<Integer, TestObject> inMemoryCache;
+    private InFileCache<Integer, TestObject> inFileCache;
 
     @Before
     public void initializeCaches() throws Exception {
-        inMemoryCache = new InMemoryCache<>(maxSize);
+        inFileCache = new InFileCache<>(maxSize);
     }
 
     @Test
     public void putGetTest() throws Exception {
         TestObject object = new TestObject(1, "one");
         // put object into cache
-        inMemoryCache.put(object.id, object);
+        inFileCache.put(object.id, object);
         // assert expected and actual object equals
-        TestObject actualObject = inMemoryCache.get(object.id);
+        TestObject actualObject = inFileCache.get(object.id);
         Assert.assertEquals(object, actualObject);
     }
 
@@ -29,11 +29,11 @@ public class InMemoryCacheTest {
     public void removeTest() throws Exception {
         TestObject object = new TestObject(1, "one");
         // put object into cache
-        inMemoryCache.put(object.id, object);
+        inFileCache.put(object.id, object);
         // remove object from cache
-        TestObject removedObject = inMemoryCache.remove(object.id);
+        TestObject removedObject = inFileCache.remove(object.id);
         // assert expected and actual object equals
-        TestObject actualObject = inMemoryCache.get(object.id);
+        TestObject actualObject = inFileCache.get(object.id);
         Assert.assertNull(actualObject);
         Assert.assertEquals(object, removedObject);
     }
@@ -43,12 +43,12 @@ public class InMemoryCacheTest {
         TestObject[] objects = TestObject.generate(maxSize / 2);
         // put object to cache
         for (TestObject object : objects) {
-            inMemoryCache.put(object.id, object);
+            inFileCache.put(object.id, object);
         }
         // clear cache
-        inMemoryCache.clear();
+        inFileCache.clear();
         // test cache empty
-        Assert.assertEquals(inMemoryCache.size(), 0);
+        Assert.assertTrue(inFileCache.size() == 0);
     }
 
     @Test(expected = IllegalStateException.class)
@@ -56,7 +56,7 @@ public class InMemoryCacheTest {
         TestObject[] objects = TestObject.generate(maxSize + 1);
         // cache filling over max size
         for (TestObject object : objects) {
-            inMemoryCache.put(object.id, object);
+            inFileCache.put(object.id, object);
         }
     }
 
@@ -65,23 +65,23 @@ public class InMemoryCacheTest {
         TestObject[] objects = TestObject.generate(maxSize);
         // cache filling to max size
         for (TestObject object : objects) {
-            inMemoryCache.put(object.id, object);
+            inFileCache.put(object.id, object);
         }
         // cache full assert
-        Assert.assertTrue(inMemoryCache.isFull());
+        Assert.assertTrue(inFileCache.isFull());
     }
 
     @Test
     public void containsTest() throws Exception {
         TestObject object = new TestObject(1, "one");
         // put to cache
-        inMemoryCache.put(object.id, object);
+        inFileCache.put(object.id, object);
         // contains assert
-        Assert.assertTrue(inMemoryCache.contains(object.id));
+        Assert.assertTrue(inFileCache.contains(object.id));
     }
 
     @After
     public void clearCache() throws Exception {
-        inMemoryCache.clear();
+        inFileCache.clear();
     }
 }

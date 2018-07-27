@@ -1,6 +1,6 @@
-package com.maxcim.mekh.cache;
+package com.maksim.mekh.cache;
 
-import com.maxcim.mekh.cache.cache.ICache;
+import com.maksim.mekh.cache.cache.ICache;
 
 import java.io.Serializable;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.maxcim.mekh.cache.cache;
+package com.maksim.mekh.cache.cache;
 
 import java.io.Serializable;
 import java.util.HashMap;

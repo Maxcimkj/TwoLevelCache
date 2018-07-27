@@ -1,13 +1,14 @@
-package com.maxcim.mekh.cache.strategy;
+package com.maksim.mekh.cache.strategy;
 
-import com.maxcim.mekh.cache.cache.ICache;
+import com.maksim.mekh.cache.cache.ICache;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
-public class MRUStrategyCache<K extends Serializable, V extends Serializable>
+public class LRUStrategyCache<K extends Serializable, V extends Serializable>
         extends AbstractScoreExtrudingStrategyCache<K, V> {
-    public MRUStrategyCache(ICache<K, V> cache) {
-        super(cache);
+    public LRUStrategyCache(ICache<K, V> cache) {
+        super(cache, Comparator.reverseOrder());
     }
 
     /**

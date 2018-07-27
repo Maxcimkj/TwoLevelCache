@@ -1,8 +1,8 @@
-package com.maxcim.mekh.cache;
+package com.maksim.mekh.cache;
 
-import com.maxcim.mekh.cache.cache.ICache;
-import com.maxcim.mekh.cache.strategy.IStrategyCache;
-import com.maxcim.mekh.cache.strategy.IStrategyCache.CacheEntry;
+import com.maksim.mekh.cache.cache.ICache;
+import com.maksim.mekh.cache.strategy.IStrategyCache;
+import com.maksim.mekh.cache.strategy.IStrategyCache.CacheEntry;
 
 import java.io.IOException;
 import java.io.Serializable;

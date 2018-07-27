@@ -1,6 +1,6 @@
-package com.maxcim.mekh.cache.strategy;
+package com.maksim.mekh.cache.strategy;
 
-import com.maxcim.mekh.cache.cache.ICache;
+import com.maksim.mekh.cache.cache.ICache;
 
 import java.io.Serializable;
 import java.util.Comparator;

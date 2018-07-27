@@ -1,8 +1,8 @@
-package com.maxcim.mekh.cache;
+package com.maksim.mekh.cache;
 
-import com.maxcim.mekh.cache.cache.InFileCache;
-import com.maxcim.mekh.cache.strategy.IStrategyCache.CacheEntry;
-import com.maxcim.mekh.cache.strategy.MRUStrategyCache;
+import com.maksim.mekh.cache.cache.InFileCache;
+import com.maksim.mekh.cache.strategy.IStrategyCache.CacheEntry;
+import com.maksim.mekh.cache.strategy.MRUStrategyCache;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

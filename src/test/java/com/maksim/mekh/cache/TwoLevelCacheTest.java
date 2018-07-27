@@ -1,7 +1,7 @@
-package com.maxcim.mekh.cache;
+package com.maksim.mekh.cache;
 
-import com.maxcim.mekh.cache.cache.InFileCache;
-import com.maxcim.mekh.cache.cache.InMemoryCache;
+import com.maksim.mekh.cache.cache.InFileCache;
+import com.maksim.mekh.cache.cache.InMemoryCache;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

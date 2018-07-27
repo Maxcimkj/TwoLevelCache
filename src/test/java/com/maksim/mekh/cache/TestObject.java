@@ -1,4 +1,4 @@
-package com.maxcim.mekh.cache;
+package com.maksim.mekh.cache;
 
 import java.io.Serializable;
 import java.util.Objects;

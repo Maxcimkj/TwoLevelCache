@@ -1,20 +1,20 @@
-package com.maxcim.mekh.cache;
+package com.maksim.mekh.cache;
 
-import com.maxcim.mekh.cache.cache.InMemoryCache;
-import com.maxcim.mekh.cache.strategy.IStrategyCache.CacheEntry;
-import com.maxcim.mekh.cache.strategy.LRUStrategyCache;
+import com.maksim.mekh.cache.strategy.LFUStrategyCache;
+import com.maksim.mekh.cache.cache.InMemoryCache;
+import com.maksim.mekh.cache.strategy.IStrategyCache.CacheEntry;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LRUCacheStrategyTypeTest {
+public class LFUCacheStrategyTypeTest {
     private static final int maxSize = 3;
-    private static LRUStrategyCache<Integer, TestObject> lruStrategyCache;
+    private static LFUStrategyCache<Integer, TestObject> lfuStrategyCache;
 
     @Before
     public void initializeCache() throws Exception {
-        lruStrategyCache = new LRUStrategyCache<>(new InMemoryCache<>(maxSize));
+        lfuStrategyCache = new LFUStrategyCache<>(new InMemoryCache<>(maxSize));
     }
 
     @Test
@@ -28,16 +28,17 @@ public class LRUCacheStrategyTypeTest {
 
         // put objects to cache
         for (TestObject object : firstCachingObjects) {
-            lruStrategyCache.put(object.id, object);
+            lfuStrategyCache.put(object.id, object);
         }
         // using cached objects
-        lruStrategyCache.get(3);
-        lruStrategyCache.get(1);
-        lruStrategyCache.get(2);
+        lfuStrategyCache.get(3);
+        lfuStrategyCache.get(3);
+        lfuStrategyCache.get(2);
+        lfuStrategyCache.get(2);
         // put to cache object over size
-        CacheEntry<Integer, TestObject> extrudedCacheEntry = lruStrategyCache.put(lastCachingObject.id, lastCachingObject);
-        // assert that cache extruded last update object
-        Assert.assertEquals(extrudedCacheEntry.getValue(), firstCachingObjects[2]);
+        CacheEntry<Integer, TestObject> extrudedCacheEntry = lfuStrategyCache.put(lastCachingObject.id, lastCachingObject);
+
+        Assert.assertEquals(extrudedCacheEntry.getValue(), firstCachingObjects[0]);
     }
 
     @Test
@@ -48,16 +49,17 @@ public class LRUCacheStrategyTypeTest {
                 new TestObject(3, "Three")
         };
         TestObject lastCachingObject = new TestObject(4, "Four");
+
         // put objects to cache
         for (TestObject object : firstCachingObjects) {
-            lruStrategyCache.put(object.id, object);
+            lfuStrategyCache.put(object.id, object);
         }
-        // get objects
-        lruStrategyCache.get(2);
-        lruStrategyCache.get(3);
+        // using cached objects
+        lfuStrategyCache.get(2);
+        lfuStrategyCache.get(3);
         // put to cache object over size
-        CacheEntry<Integer, TestObject> extrudedCacheEntry = lruStrategyCache.put(lastCachingObject.id, lastCachingObject);
-        // assert that cache extruded unused object
+        CacheEntry<Integer, TestObject> extrudedCacheEntry = lfuStrategyCache.put(lastCachingObject.id, lastCachingObject);
+        // assert that cache extrude seldom using object
         Assert.assertEquals(extrudedCacheEntry.getValue(), firstCachingObjects[0]);
     }
 
@@ -66,7 +68,7 @@ public class LRUCacheStrategyTypeTest {
         TestObject[] objects = TestObject.generate(maxSize * 2);
         // cache filling over max size
         for (TestObject object : objects) {
-            lruStrategyCache.put(object.id, object);
+            lfuStrategyCache.put(object.id, object);
         }
         // no exception test
         Assert.assertTrue(true);
@@ -74,6 +76,6 @@ public class LRUCacheStrategyTypeTest {
 
     @After
     public void clearCache() throws Exception {
-        lruStrategyCache.clear();
+        lfuStrategyCache.clear();
     }
 }
